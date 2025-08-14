@@ -7,12 +7,44 @@
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js').catch(ex => console.log(`Exception: ${ex}`));
             }
+
+            document.getElementById("resultaat").innerHTML = '<tr>Content aan het laden...</tr>';
+            // Timout om laad bericht te testen
+            setTimeout(() => {
+                fetch('https://api.imdbapi.dev/interests').then(x => x.json()).then(data => {
+                    const rows = data.categories.find(c => c.category === 'Fantasy').interests.map(
+                        e =>
+                            `<tr>
+              <td>${e.name}</td>
+              <td><img src='${e.primaryImage.url}' style='width: 200px; ' /></td>         
+            </tr>`
+                    ).join('');
+
+                    document.getElementById("resultaat").innerHTML = rows;
+                });
+            }, 2000);
+
+
         }
+
     </script>
 </head>
 
 <body style='font-family:Arial, Helvetica, sans-serif; text-align: left;'>
+    <div style='width: 500px; float: left;'>
+        <h1>Hobby API:</h1>
+        <table>
+            <thead style='text-align: left;'>
+                <tr>
+                    <th>Genre</th>
+                    <th>Afbeelding</th>
+                </tr>
+            </thead>
+            <tbody id="resultaat">
 
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
