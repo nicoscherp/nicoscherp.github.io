@@ -1,9 +1,12 @@
 <html>
 
 <head>
+    <link rel='manifest' href=manifest.json />
     <script>
         window.onload = function () {
-
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js').catch(ex => console.log(`Exception: ${ex}`));
+            }
         }
     </script>
 </head>
