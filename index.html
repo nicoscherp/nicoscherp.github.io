@@ -4,6 +4,8 @@
     <link rel='manifest' href=manifest.json />
     <script>
         window.onload = function () {
+            local = localStorage;
+
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js').catch(ex => console.log(`Exception: ${ex}`));
             }
@@ -24,7 +26,19 @@
                 });
             }, 2000);
 
+            document.getElementById("btnSave").addEventListener("click", function () {
+                var rowData = document.getElementById("resultaat").innerHTML;
+                if (rowData != "") {
+                    local.setItem("rows", rowData);
+                }
+            }, false);
 
+            document.getElementById("btnLoad").addEventListener("click", function () {
+                var rowData = local.getItem("rows");
+                if (rowData != "") {
+                    document.getElementById("resultaat2").innerHTML = rowData;
+                }
+            }, false);
         }
 
     </script>
@@ -33,6 +47,7 @@
 <body style='font-family:Arial, Helvetica, sans-serif; text-align: left;'>
     <div style='width: 500px; float: left;'>
         <h1>Hobby API:</h1>
+        <button id="btnSave">Opslaan</button>
         <table>
             <thead style='text-align: left;'>
                 <tr>
@@ -41,6 +56,21 @@
                 </tr>
             </thead>
             <tbody id="resultaat">
+
+            </tbody>
+        </table>
+    </div>
+    <div style='width: 500px; float: left;'>
+        <h1>Locale data:</h1>
+        <button id="btnLoad">Laden</button>
+        <table>
+            <thead style='text-align: left;'>
+                <tr>
+                    <th>Genre</th>
+                    <th>Afbeelding</th>
+                </tr>
+            </thead>
+            <tbody id="resultaat2">
 
             </tbody>
         </table>
