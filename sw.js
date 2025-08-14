@@ -1,3 +1,3 @@
 self.addEventListener('fetch', event => {
-    console.log('Fetch: ', event.request.url);
+    console.log('Bezig met een fetch: ', event.request.url);
 });
