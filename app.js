@@ -1,4 +1,4 @@
-import { Category } from "./category";
+import { Category } from "./category.js";
 
 function setInnerHTML(naam, content) {
     document.getElementById(naam).innerHTML = content;
@@ -8,15 +8,11 @@ function getInnerHTML(naam) {
     return document.getElementById(naam).innerHTML;
 }
 
-function getInterests(data, category) {
-    return data.categories.find(c => c.category === category).interests
-}
-
 function renderRow(e) {
     return `
     <tr>
       <td>${e.name ?? ''}</td>
-      <td>${e.primaryImage?.url ? `<img src="${e.primaryImage.url}" style="width:200px;" />` : ''}</td>
+      <td>${e.imageUrl ? `<img src="${e.imageUrl}" style="width:200px;" />` : ''}</td>
     </tr>
   `;
 }
@@ -42,15 +38,19 @@ window.onload = () => {
 
     setInnerHTML('resultaat', '<tr>Content aan het laden...</tr>');
 
+    let categories;
+
     fetch('https://api.imdbapi.dev/interests')
         .then(x => x.json())
         .then(data => {
             const result = data.categories;
-            const categories = Array.isArray(result) ? result.map(Category.fromJSON) : [];
-            const rows = getInterests(data, 'Fantasy').map(renderRow).join('');
+            categories = Array.isArray(result) ? result.map(Category.fromJSON) : [];
+        })
+        .then(() => {
+            const interests = categories.find(c => c.name === 'Fantasy').interests;
+            const rows = interests.map(renderRow).join('');
             setInnerHTML('resultaat', rows);
         });
-
 
     document.getElementById('btnSave').addEventListener('click', saveToLocal, false);
 

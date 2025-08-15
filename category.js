@@ -1,4 +1,4 @@
-import { Interest } from "./interest";
+import { Interest } from "./interest.js";
 
 export class Category {
     constructor({ name, interests = [] }) {
