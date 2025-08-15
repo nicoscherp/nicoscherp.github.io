@@ -1,0 +1,28 @@
+{
+  "categories": [
+    {
+      "category": "Action",
+      "interests": [
+        {
+          "id": "in0000001",
+          "name": "Action",
+          "primaryImage": {
+            "url": "https://m.media-amazon.com/images/M/MV5BMDU4ZmM1NjYtNGY2MS00NmE1LThiMzAtNzU3NWZhYmM0ZjgxXkEyXkFqcGc@._V1_.jpg",
+            "width": 1280,
+            "height": 720
+          },
+          "description": "The action genre features fast-paced, thrilling, and intense sequences of physical feats, combat, and excitement. The characters of these stories are involved in daring and often dangerous situations, requiring them to rely on their physical prowess, skills, and quick thinking to overcome challenges and adversaries."
+        },
+        {
+          "id": "in0000002",
+          "name": "Action Epic",
+          "primaryImage": {
+            "url": "https://m.media-amazon.com/images/M/MV5BM2RkNmFkZTItODFkMS00Yjk5LTg2YTQtMGQ0Zjc0Mzk3ZGQ5XkEyXkFqcGc@._V1_.jpg",
+            "width": 1366,
+            "height": 768
+          },
+          "isSubgenre": true
+        }]
+    }
+  ]
+}
